@@ -29,7 +29,7 @@
                     Timer
                 </TextBlock>
 
-                <ScrollViewer Grid.Column="1">
+                <ScrollViewer Grid.Column="1" VerticalScrollBarVisibility="Auto">
                     <StackPanel>
                         <Label HorizontalAlignment="Center">Time History</Label>
                         <TextBlock Name="TimeHistory" HorizontalAlignment="Center"></TextBlock>
