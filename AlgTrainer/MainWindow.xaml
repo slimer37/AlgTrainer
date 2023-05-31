@@ -29,12 +29,12 @@
                     Timer
                 </TextBlock>
 
-                <ScrollViewer Grid.Column="1" VerticalScrollBarVisibility="Auto">
-                    <StackPanel>
-                        <Label HorizontalAlignment="Center">Time History</Label>
+                <DockPanel Grid.Column="1" HorizontalAlignment="Stretch">
+                    <Label DockPanel.Dock="Top" HorizontalAlignment="Stretch" HorizontalContentAlignment="Center" BorderThickness="0,0,0,1" BorderBrush="Black">Time History</Label>
+                    <ScrollViewer VerticalScrollBarVisibility="Auto">
                         <TextBlock Name="TimeHistory" HorizontalAlignment="Center"></TextBlock>
-                    </StackPanel>
-                </ScrollViewer>
+                    </ScrollViewer>
+                </DockPanel>
             </Grid>
         </DockPanel>
     </Grid>
