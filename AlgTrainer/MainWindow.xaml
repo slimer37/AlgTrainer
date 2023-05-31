@@ -7,8 +7,28 @@
         mc:Ignorable="d"
         Title="MainWindow" Height="450" Width="800">
     <Grid>
-        <StackPanel Orientation="Vertical">
-            <TextBlock Name="Algorithm" HorizontalAlignment="Center" VerticalAlignment="Center">Algorithm</TextBlock>
-        </StackPanel>
+        <DockPanel LastChildFill="True">
+            <Border Margin="1" BorderThickness="1" BorderBrush="DimGray" MaxHeight="100" DockPanel.Dock="Top">
+                <Grid Margin="5">
+                    <Button HorizontalAlignment="Left" Padding="5">&lt;</Button>
+                    <TextBlock Name="Algorithm" HorizontalAlignment="Center" VerticalAlignment="Center">Algorithm</TextBlock>
+                    <Button HorizontalAlignment="Right" Padding="5">&gt;</Button>
+                </Grid>
+            </Border>
+
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="500"/>
+                    <ColumnDefinition/>
+                    <ColumnDefinition/>
+                </Grid.ColumnDefinitions>
+
+                <Border Grid.Column="1" BorderBrush="DimGray" BorderThickness="1,0"/>
+
+                <TextBlock Name="Timer" Grid.Column="0" VerticalAlignment="Center" HorizontalAlignment="Center" FontSize="50">
+                    Timer
+                </TextBlock>
+            </Grid>
+        </DockPanel>
     </Grid>
 </Window>

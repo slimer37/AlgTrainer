@@ -12,6 +12,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using System.Windows.Threading;
 
 namespace AlgTrainer
 {
@@ -20,22 +21,63 @@ namespace AlgTrainer
     /// </summary>
     public partial class MainWindow : Window
     {
+        DispatcherTimer timer;
+        TimeSpan elapsedTime;
+        double funnyTimer;
+
         public MainWindow()
         {
             InitializeComponent();
 
             FunnyAlgorithmText();
+
+            KeyDown += OnKeyDown;
+
+            timer = new DispatcherTimer();
+
+            timer.Tick += Timer_Tick;
+
+            timer.Interval = new TimeSpan(0, 0, 0, 0, 10);
+
+            elapsedTime = new TimeSpan();
         }
 
-        double timer;
+        private void Timer_Tick(object? sender, EventArgs e)
+        {
+            elapsedTime = elapsedTime.Add(timer.Interval);
+            Timer.Text = elapsedTime.ToString(@"ss\.ff");
+        }
 
-        async void FunnyAlgorithmText()
+        private void OnKeyDown(object sender, KeyEventArgs e)
+        {
+            switch (e.Key)
+            {
+                case Key.Space:
+                    ToggleTimer();
+                    break;
+            }
+        }
+
+        private void ToggleTimer()
+        {
+            if (!timer.IsEnabled)
+            {
+                elapsedTime = new TimeSpan();
+                timer.Start();
+            }
+            else
+            {
+                timer.Stop();
+            }
+        }
+
+        private async void FunnyAlgorithmText()
         {
             while (true)
             {
                 await Task.Delay(10);
-                timer += 0.1;
-                Algorithm.FontSize = 20 + Math.Sin(timer) * 3;
+                funnyTimer += 0.1;
+                Algorithm.FontSize = 20 + Math.Sin(funnyTimer) * 3;
             }
         }
     }
