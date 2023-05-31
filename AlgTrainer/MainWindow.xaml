@@ -28,6 +28,13 @@
                 <TextBlock Name="Timer" Grid.Column="0" VerticalAlignment="Center" HorizontalAlignment="Center" FontSize="50">
                     Timer
                 </TextBlock>
+
+                <ScrollViewer Grid.Column="1">
+                    <StackPanel>
+                        <Label HorizontalAlignment="Center">Time History</Label>
+                        <TextBlock Name="TimeHistory" HorizontalAlignment="Center"></TextBlock>
+                    </StackPanel>
+                </ScrollViewer>
             </Grid>
         </DockPanel>
     </Grid>

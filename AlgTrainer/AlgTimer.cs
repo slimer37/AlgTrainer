@@ -7,13 +7,18 @@ namespace AlgTrainer
     public class AlgTimer
     {
         DispatcherTimer _timer;
-        TimeSpan _elapsedTime;
 
-        TextBlock _textBlock;
+        DateTime _startTime;
 
-        public AlgTimer(TextBlock textBlock)
+        TextBlock _timeText;
+        TextBlock _historyText;
+
+        string FormattedTime => (DateTime.UtcNow - _startTime).ToString(@"ss\.ff");
+
+        public AlgTimer(TextBlock timeText, TextBlock historyText)
         {
-            _textBlock = textBlock;
+            _timeText = timeText;
+            _historyText = historyText;
 
             _timer = new DispatcherTimer();
 
@@ -24,24 +29,22 @@ namespace AlgTrainer
             ResetTime();
         }
 
-        private void Tick(object? sender, EventArgs e)
-        {
-            _elapsedTime = _elapsedTime.Add(_timer.Interval);
+        private void Tick(object? sender, EventArgs e) => _timeText.Text = FormattedTime;
 
-            _textBlock.Text = _elapsedTime.ToString(@"ss\.ff");
-        }
-
-        private void ResetTime() => _elapsedTime = new TimeSpan();
+        private void ResetTime() => _startTime = DateTime.UtcNow;
 
         public void ToggleTimer()
         {
             if (!_timer.IsEnabled)
             {
                 ResetTime();
+
                 _timer.Start();
             }
             else
             {
+                _historyText.Text += FormattedTime + '\n';
+
                 _timer.Stop();
             }
         }

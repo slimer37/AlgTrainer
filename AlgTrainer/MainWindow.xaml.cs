@@ -33,7 +33,7 @@ namespace AlgTrainer
 
             KeyDown += OnKeyDown;
 
-            _algTimer = new AlgTimer(Timer);
+            _algTimer = new AlgTimer(Timer, TimeHistory);
         }
 
         private void OnKeyDown(object sender, KeyEventArgs e)
