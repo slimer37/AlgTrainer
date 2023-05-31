@@ -21,9 +21,9 @@ namespace AlgTrainer
     /// </summary>
     public partial class MainWindow : Window
     {
-        DispatcherTimer timer;
-        TimeSpan elapsedTime;
-        double funnyTimer;
+        double _funnyTimer;
+
+        AlgTimer _algTimer;
 
         public MainWindow()
         {
@@ -33,19 +33,7 @@ namespace AlgTrainer
 
             KeyDown += OnKeyDown;
 
-            timer = new DispatcherTimer();
-
-            timer.Tick += Timer_Tick;
-
-            timer.Interval = new TimeSpan(0, 0, 0, 0, 10);
-
-            elapsedTime = new TimeSpan();
-        }
-
-        private void Timer_Tick(object? sender, EventArgs e)
-        {
-            elapsedTime = elapsedTime.Add(timer.Interval);
-            Timer.Text = elapsedTime.ToString(@"ss\.ff");
+            _algTimer = new AlgTimer(Timer);
         }
 
         private void OnKeyDown(object sender, KeyEventArgs e)
@@ -53,21 +41,8 @@ namespace AlgTrainer
             switch (e.Key)
             {
                 case Key.Space:
-                    ToggleTimer();
+                    _algTimer.ToggleTimer();
                     break;
-            }
-        }
-
-        private void ToggleTimer()
-        {
-            if (!timer.IsEnabled)
-            {
-                elapsedTime = new TimeSpan();
-                timer.Start();
-            }
-            else
-            {
-                timer.Stop();
             }
         }
 
@@ -76,8 +51,8 @@ namespace AlgTrainer
             while (true)
             {
                 await Task.Delay(10);
-                funnyTimer += 0.1;
-                Algorithm.FontSize = 20 + Math.Sin(funnyTimer) * 3;
+                _funnyTimer += 0.1;
+                Algorithm.FontSize = 20 + Math.Sin(_funnyTimer) * 3;
             }
         }
     }
